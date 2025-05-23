@@ -1,11 +1,13 @@
 # Task Management Application Documentation
 ## Project Overview
 This application is a RESTful API designed for managing tasks and users. It allows users to create, read, update, and delete tasks, as well as manage user accounts. The application uses Node.js, Express, and MongoDB.
+
 **Key Features:**
 *   User authentication and authorization.
 *   Task management (create, read, update, delete).
 *   User management (create, read, login).
 *   Task filtering and pagination.
+
 **Requirements:**
 *   Node.js (version 14 or higher)
 *   MongoDB
