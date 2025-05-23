@@ -47,6 +47,7 @@ This application is a RESTful API designed for managing tasks and users. It allo
     
     The server will start on the port specified in the `.env` file (default: 3000).
 ## Code Structure
+```text
 TaskManagement/
 ├── controllers/
 │   ├── task.controller.js  # Handles task-related logic
@@ -62,6 +63,7 @@ TaskManagement/
 ├── .gitignore              # Specifies intentionally untracked files that Git should ignore
 ├── index.js                # Main application entry point
 └── package.json            # Project dependencies and scripts
+```
 **Key Components:**
 *   **`index.js`:**  The main entry point of the application. It initializes the Express app, connects to the MongoDB database, and registers the routes.
 *   **`controllers`:** Contains the logic for handling requests and interacting with the models.
