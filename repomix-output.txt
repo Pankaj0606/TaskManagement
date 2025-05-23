@@ -1,0 +1,383 @@
+This file is a merged representation of the entire codebase, combined into a single document by Repomix.
+
+================================================================
+File Summary
+================================================================
+
+Purpose:
+--------
+This file contains a packed representation of the entire repository's contents.
+It is designed to be easily consumable by AI systems for analysis, code review,
+or other automated processes.
+
+File Format:
+------------
+The content is organized as follows:
+1. This summary section
+2. Repository information
+3. Directory structure
+4. Multiple file entries, each consisting of:
+  a. A separator line (================)
+  b. The file path (File: path/to/file)
+  c. Another separator line
+  d. The full contents of the file
+  e. A blank line
+
+Usage Guidelines:
+-----------------
+- This file should be treated as read-only. Any changes should be made to the
+  original repository files, not this packed version.
+- When processing this file, use the file path to distinguish
+  between different files in the repository.
+- Be aware that this file may contain sensitive information. Handle it with
+  the same level of security as you would the original repository.
+
+Notes:
+------
+- Some files may have been excluded based on .gitignore rules and Repomix's configuration
+- Binary files are not included in this packed representation. Please refer to the Repository Structure section for a complete list of file paths, including binary files
+- Files matching patterns in .gitignore are excluded
+- Files matching default ignore patterns are excluded
+
+Additional Info:
+----------------
+
+================================================================
+Directory Structure
+================================================================
+controllers/
+  task.controller.js
+  user.controller.js
+middleware/
+  auth.js
+models/
+  task.model.js
+  user.model.js
+routes/
+  task.routes.js
+  user.routes.js
+index.js
+package.json
+
+================================================================
+Files
+================================================================
+
+================
+File: controllers/task.controller.js
+================
+const Task = require('../models/task.model');
+
+// Create a new task
+exports.createTask = async (req, res) => {
+  try {
+    const task = new Task(req.body);
+    await task.save();
+    res.status(201).send(task);
+  } catch (error) {
+    res.status(400).send(error);
+  }
+};
+
+// Get task details by ID
+exports.getTaskById = async (req, res) => {
+  try {
+    const task = await Task.findById(req.params.id).populate('assignedUserId', 'name email');
+    if (!task) {
+      return res.status(404).send();
+    }
+    res.send(task);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+};
+
+// Get all tasks with optional filtering and pagination
+exports.getAllTasks = async (req, res) => {
+  try {
+    const query = {};
+
+    if (req.query.status) {
+      query.status = req.query.status;
+    }
+    if (req.query.assignedUserId) {
+      query.assignedUserId = req.query.assignedUserId;
+    }
+
+    const page = parseInt(req.query.page) || 1;     // Default to page 1
+    const limit = parseInt(req.query.limit) || 10;  // Default to 10 tasks per page
+    const skip = (page - 1) * limit;
+
+    const tasks = await Task.find(query)
+      .populate('assignedUserId', 'name email')
+      .skip(skip)
+      .limit(limit);
+
+    const total = await Task.countDocuments(query);
+
+    res.send({
+      total,
+      page,
+      pages: Math.ceil(total / limit),
+      tasks
+    });
+  } catch (error) {
+    res.status(500).send(error);
+  }
+};
+
+
+// Update a task
+exports.updateTask = async (req, res) => {
+  try {
+    const task = await Task.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true });
+    if (!task) {
+      return res.status(404).send();
+    }
+    res.send(task);
+  } catch (error) {
+    res.status(400).send(error);
+  }
+};
+
+// Delete a task
+exports.deleteTask = async (req, res) => {
+  try {
+    const task = await Task.findByIdAndDelete(req.params.id);
+    if (!task) {
+      return res.status(404).send();
+    }
+    res.send(task);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+};
+
+================
+File: controllers/user.controller.js
+================
+const User = require('../models/user.model');
+
+// Create a new user
+exports.createUser = async (req, res) => {
+  try {
+    const user = new User(req.body);
+    await user.save();
+    res.status(201).send(user);
+  } catch (error) {
+    res.status(400).send(error);
+  }
+};
+
+// Get user details by ID
+exports.getUserById = async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+    if (!user) {
+      return res.status(404).send();
+    }
+    res.send(user);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+};
+
+// Get all users
+exports.getAllUsers = async (req, res) => {
+  try {
+    const users = await User.find({});
+    res.send(users);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+};
+
+exports.loginUser = async (req, res) => {
+  try {
+    const user = await User.findByCredentials(req.body.email, req.body.password);
+    const token = user.generateAuthToken();
+    res.send({ user, token });
+  } catch (error) {
+    res.status(400).send({ error: error.message });
+  }
+};
+
+================
+File: middleware/auth.js
+================
+const jwt = require('jsonwebtoken');
+const User = require('../models/user.model');
+
+const auth = async (req, res, next) => {
+  try {
+    const token = req.header('Authorization').replace('Bearer ', '');
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const user = await User.findById(decoded._id);
+
+    if (!user) throw new Error();
+
+    req.user = user; // Add user to request
+    next();
+  } catch (error) {
+    res.status(401).send({ error: 'Please authenticate.' });
+  }
+};
+
+module.exports = auth;
+
+================
+File: models/task.model.js
+================
+const mongoose = require('mongoose');
+
+const taskSchema = new mongoose.Schema({
+  title: { type: String, required: true },
+  description: { type: String },
+  dueDate: { type: Date },
+  status: { type: String, enum: ['pending', 'in-progress', 'completed'], default: 'pending' },
+  assignedUserId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+}, { timestamps: true });
+
+module.exports = mongoose.model('Task', taskSchema);
+
+================
+File: models/user.model.js
+================
+const mongoose = require('mongoose');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+
+const userSchema = new mongoose.Schema({
+  name: { type: String, required: true },
+  email: { type: String, required: true, unique: true },
+  password: { type: String, required: true },
+}, { timestamps: true });
+
+// Hash password before saving
+userSchema.pre('save', async function (next) {
+  if (this.isModified('password')) {
+    this.password = await bcrypt.hash(this.password, 8);
+  }
+  next();
+});
+
+// Method to generate JWT
+userSchema.methods.generateAuthToken = function () {
+  return jwt.sign({ _id: this._id.toString() }, process.env.JWT_SECRET, { expiresIn: '7d' });
+};
+
+// Method to validate credentials
+userSchema.statics.findByCredentials = async (email, password) => {
+  const user = await mongoose.model('User').findOne({ email });
+  if (!user) throw new Error('Invalid login');
+  const isMatch = await bcrypt.compare(password, user.password);
+  if (!isMatch) throw new Error('Invalid login');
+  return user;
+};
+
+module.exports = mongoose.model('User', userSchema);
+
+================
+File: routes/task.routes.js
+================
+const express = require('express');
+const router = express.Router();
+const taskController = require('../controllers/task.controller');
+const auth = require('../middleware/auth');
+
+router.post('/tasks', auth, taskController.createTask);
+router.get('/tasks/:id', auth, taskController.getTaskById);
+router.get('/tasks', auth, taskController.getAllTasks);
+router.put('/tasks/:id', auth, taskController.updateTask);
+router.delete('/tasks/:id', auth, taskController.deleteTask);
+
+module.exports = router;
+
+================
+File: routes/user.routes.js
+================
+const express = require('express');
+const router = express.Router();
+const userController = require('../controllers/user.controller');
+
+router.post('/users', userController.createUser);
+router.post('/users/login', userController.loginUser);
+router.get('/users/:id', userController.getUserById);
+router.get('/users', userController.getAllUsers);
+
+module.exports = router;
+
+================
+File: index.js
+================
+const express = require('express');
+const mongoose = require('mongoose');
+require('dotenv').config();
+
+// --- 1. INITIALIZE APP ---
+const app = express();
+
+// --- 2. MIDDLEWARE ---
+// This line tells Express to parse incoming JSON.
+// It MUST come before you register your routes.
+app.use(express.json());
+
+// --- 3. ROUTES ---
+// Import your route files
+const userRoutes = require('./routes/user.routes');
+const taskRoutes = require('./routes/task.routes');
+
+// Register the routes
+app.use('/api', userRoutes);
+app.use('/api', taskRoutes);
+
+// --- 4. DEFINE PORT ---
+const PORT = process.env.PORT || 3000;
+
+// --- 5. CONNECT TO DATABASE & START SERVER ---
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => {
+    console.log('Connected to MongoDB');
+    // Only start listening for requests after the DB connection is successful
+    app.listen(PORT, () => {
+      console.log(`Server is running on port ${PORT}`);
+    });
+  })
+  .catch(err => {
+    console.error('Database connection error:', err);
+    process.exit(1); // Exit the process if DB connection fails
+  });
+
+================
+File: package.json
+================
+{
+  "name": "taskmanagement",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.15.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}
+
+
+
+================================================================
+End of Codebase
+================================================================
