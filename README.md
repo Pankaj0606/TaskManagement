@@ -13,7 +13,7 @@ This application is a RESTful API designed for managing tasks and users. It allo
 ### Installation
 1.  **Clone the repository:**
     ```bash
-    git clone <repository_url>
+    git clone https://github.com/Pankaj0606/TaskManagement
     ```
     
 2.  **Navigate to the project directory:**
@@ -77,6 +77,8 @@ TaskManagement/
       "password": "password123"
     }
     ```
+    <img width="397" alt="Screenshot 2025-05-23 at 8 49 56 PM" src="https://github.com/user-attachments/assets/583e2c4e-5b07-4fdc-bea6-a183be43d813" />
+
     
 *   **Response (201 Created):**
     ```json
@@ -89,51 +91,68 @@ TaskManagement/
       "__v": 0
     }
     ```
-    
+    <img width="682" alt="Screenshot 2025-05-23 at 8 50 25 PM" src="https://github.com/user-attachments/assets/ae518471-a8bd-4f45-bdff-cd08fd2da6d1" />
+
 *   **Response (400 Bad Request):**
     ```json
     {
-      "errors": [
-        {
-          "location": "body",
-          "msg": "Name is required",
-          "param": "name"
+    "errors": {
+        "name": {
+            "name": "ValidatorError",
+            "message": "Path `name` is required.",
+            "properties": {
+                "message": "Path `name` is required.",
+                "type": "required",
+                "path": "name"
+            },
+            "kind": "required",
+            "path": "name"
         }
-      ]
+    },
+    "_message": "User validation failed",
+    "name": "ValidationError",
+    "message": "User validation failed: name: Path `name` is required."
     }
     ```
+    <img width="651" alt="Screenshot 2025-05-23 at 8 51 05 PM" src="https://github.com/user-attachments/assets/bdea1dbf-3a65-4331-af0e-6a10e94c3aa4" />
+
     
 #### POST /api/users/login
 *   **Description:** Logs in an existing user.
 *   **Request Body:**
     ```json
     {
-      "email": "john.doe@example.com",
-      "password": "password123"
+      "email": "21cs3031@rgipt.ac.in",
+      "password": "mySecurePass123"
     }
     ```
-    
+    <img width="400" alt="Screenshot 2025-05-23 at 8 53 10 PM" src="https://github.com/user-attachments/assets/15d5d4be-a6e9-42d6-9bcd-81a66ffa2503" />
+
 *   **Response (200 OK):**
     ```json
     {
-      "user": {
-        "_id": "64b0b0b0b0b0b0b0b0b0b0b0",
-        "name": "John Doe",
-        "email": "john.doe@example.com",
-        "createdAt": "2024-07-14T00:00:00.000Z",
-        "updatedAt": "2024-07-14T00:00:00.000Z",
+    "user": {
+        "_id": "683092116036d159b890b66d",
+        "name": "Pankaj",
+        "email": "21cs3031@rgipt.ac.in",
+        "password": "$2b$08$aVm6ztXYWrFzdm3RCoAQ9u82QQsAxFjN1nV5saG98VbdnArZIosui",
+        "createdAt": "2025-05-23T15:19:45.805Z",
+        "updatedAt": "2025-05-23T15:19:45.805Z",
         "__v": 0
-      },
-      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGIwYjBiMGIwYjBiMGIwYjBiMGIwMCIsImlhdCI6MTY4OTMzNDQwMCwiZXhwIjoxNjg5OTM5MjAwfQ.xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+    },
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODMwOTIxMTYwMzZkMTU5Yjg5MGI2NmQiLCJpYXQiOjE3NDgwMTM3NzksImV4cCI6MTc0ODYxODU3OX0.FoL_f5dJ7c0p1emmp05qneH4JWy1vOMIdwnEb1Ds1WQ"
     }
     ```
-    
+    <img width="797" alt="Screenshot 2025-05-23 at 8 53 51 PM" src="https://github.com/user-attachments/assets/dc1323a3-e601-49b2-b5a6-8b5199aab951" />
+
 *   **Response (400 Bad Request):**
     ```json
     {
       "error": "Invalid login"
     }
     ```
+    <img width="536" alt="Screenshot 2025-05-23 at 8 54 34 PM" src="https://github.com/user-attachments/assets/08daf8ac-8c66-4255-b3ca-f3d441bf006e" />
+
     
 #### GET /api/users/:id
 *   **Description:** Gets a user by ID.
