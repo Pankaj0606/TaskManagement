@@ -72,9 +72,9 @@ TaskManagement/
 *   **Request Body:**
     ```json
     {
-      "name": "John Doe",
-      "email": "john.doe@example.com",
-      "password": "password123"
+          "name": "Pankaj",
+          "email": "21cs3031@rgipt.ac.in",
+          "password": "mySecurePass123"
     }
     ```
     <img width="397" alt="Screenshot 2025-05-23 at 8 49 56 PM" src="https://github.com/user-attachments/assets/583e2c4e-5b07-4fdc-bea6-a183be43d813" />
@@ -83,12 +83,13 @@ TaskManagement/
 *   **Response (201 Created):**
     ```json
     {
-      "_id": "64b0b0b0b0b0b0b0b0b0b0b0",
-      "name": "John Doe",
-      "email": "john.doe@example.com",
-      "createdAt": "2024-07-14T00:00:00.000Z",
-      "updatedAt": "2024-07-14T00:00:00.000Z",
-      "__v": 0
+        "_id": "683092116036d159b890b66d",
+        "name": "Pankaj",
+        "email": "21cs3031@rgipt.ac.in",
+        "password": "$2b$08$aVm6ztXYWrFzdm3RCoAQ9u82QQsAxFjN1nV5saG98VbdnArZIosui",
+        "createdAt": "2025-05-23T15:19:45.805Z",
+        "updatedAt": "2025-05-23T15:19:45.805Z",
+        "__v": 0
     }
     ```
     <img width="682" alt="Screenshot 2025-05-23 at 8 50 25 PM" src="https://github.com/user-attachments/assets/ae518471-a8bd-4f45-bdff-cd08fd2da6d1" />
@@ -96,22 +97,22 @@ TaskManagement/
 *   **Response (400 Bad Request):**
     ```json
     {
-    "errors": {
-        "name": {
-            "name": "ValidatorError",
-            "message": "Path `name` is required.",
-            "properties": {
+        "errors": {
+            "name": {
+                "name": "ValidatorError",
                 "message": "Path `name` is required.",
-                "type": "required",
+                "properties": {
+                    "message": "Path `name` is required.",
+                    "type": "required",
+                    "path": "name"
+                },
+                "kind": "required",
                 "path": "name"
-            },
-            "kind": "required",
-            "path": "name"
-        }
-    },
-    "_message": "User validation failed",
-    "name": "ValidationError",
-    "message": "User validation failed: name: Path `name` is required."
+            }
+        },
+        "_message": "User validation failed",
+        "name": "ValidationError",
+        "message": "User validation failed: name: Path `name` is required."
     }
     ```
     <img width="651" alt="Screenshot 2025-05-23 at 8 51 05 PM" src="https://github.com/user-attachments/assets/bdea1dbf-3a65-4331-af0e-6a10e94c3aa4" />
@@ -131,16 +132,17 @@ TaskManagement/
 *   **Response (200 OK):**
     ```json
     {
-    "user": {
-        "_id": "683092116036d159b890b66d",
-        "name": "Pankaj",
-        "email": "21cs3031@rgipt.ac.in",
-        "password": "$2b$08$aVm6ztXYWrFzdm3RCoAQ9u82QQsAxFjN1nV5saG98VbdnArZIosui",
-        "createdAt": "2025-05-23T15:19:45.805Z",
-        "updatedAt": "2025-05-23T15:19:45.805Z",
-        "__v": 0
-    },
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODMwOTIxMTYwMzZkMTU5Yjg5MGI2NmQiLCJpYXQiOjE3NDgwMTM3NzksImV4cCI6MTc0ODYxODU3OX0.FoL_f5dJ7c0p1emmp05qneH4JWy1vOMIdwnEb1Ds1WQ"
+        "user": {
+            "_id": "683092116036d159b890b66d",
+            "name": "Pankaj",
+            "email": "21cs3031@rgipt.ac.in",
+            "password": "$2b$08$aVm6ztXYWrFzdm3RCoAQ9u82QQsAxFjN1nV5saG98VbdnArZIosui",
+            "createdAt": "2025-05-23T15:19:45.805Z",
+            "updatedAt": "2025-05-23T15:19:45.805Z",
+            "__v": 0
+        },
+        "token":
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODMwOTIxMTYwMzZkMTU5Yjg5MGI2NmQiLCJpYXQiOjE3NDgwMTM3NzksImV4cCI6MTc0ODYxODU3OX0.FoL_f5dJ7c0p1emmp05qneH4JWy1vOMIdwnEb1Ds1WQ"
     }
     ```
     <img width="797" alt="Screenshot 2025-05-23 at 8 53 51 PM" src="https://github.com/user-attachments/assets/dc1323a3-e601-49b2-b5a6-8b5199aab951" />
@@ -160,23 +162,29 @@ TaskManagement/
     *   `Authorization: Bearer <token>`
 *   **Path Parameters:**
     *   `id`: The ID of the user.
+      <img width="576" alt="Screenshot 2025-05-23 at 9 48 45 PM" src="https://github.com/user-attachments/assets/318a4888-b99f-4671-86a2-ffc41e3c816e" />
+
 *   **Response (200 OK):**
     ```json
     {
-      "_id": "64b0b0b0b0b0b0b0b0b0b0b0",
-      "name": "John Doe",
-      "email": "john.doe@example.com",
-      "createdAt": "2024-07-14T00:00:00.000Z",
-      "updatedAt": "2024-07-14T00:00:00.000Z",
-      "__v": 0
+        "_id": "683092116036d159b890b66d",
+        "name": "Pankaj",
+        "email": "21cs3031@rgipt.ac.in",
+        "password": "$2b$08$aVm6ztXYWrFzdm3RCoAQ9u82QQsAxFjN1nV5saG98VbdnArZIosui",
+        "createdAt": "2025-05-23T15:19:45.805Z",
+        "updatedAt": "2025-05-23T15:19:45.805Z",
+        "__v": 0
     }
     ```
+    <img width="658" alt="Screenshot 2025-05-23 at 9 49 05 PM" src="https://github.com/user-attachments/assets/86c65d29-52b5-4d14-8894-7a861985ba32" />
+
     
 *   **Response (404 Not Found):**
     ```json
     {}
     ```
-    
+    <img width="603" alt="Screenshot 2025-05-23 at 9 49 44 PM" src="https://github.com/user-attachments/assets/5a0dccba-ac88-4ae4-b04b-407acd62367d" />
+
 #### GET /api/users
 *   **Description:** Gets all users.
 *   **Request Headers:**
@@ -184,24 +192,28 @@ TaskManagement/
 *   **Response (200 OK):**
     ```json
     [
-      {
-        "_id": "64b0b0b0b0b0b0b0b0b0b0b0",
-        "name": "John Doe",
-        "email": "john.doe@example.com",
-        "createdAt": "2024-07-14T00:00:00.000Z",
-        "updatedAt": "2024-07-14T00:00:00.000Z",
+    {
+        "_id": "68308a46d378e61842bcbf4d",
+        "name": "awsd",
+        "email": "mail@mail.com",
+        "password": "$2b$08$sP3CdcZbfIFS.jKMj2M06u.tWkZz7gmtxVKI3lFqWsAzDKreV6ieW",
+        "createdAt": "2025-05-23T14:46:30.673Z",
+        "updatedAt": "2025-05-23T14:46:30.673Z",
         "__v": 0
-      },
-      {
-        "_id": "64b0b0b0b0b0b0b0b0b0b0b1",
-        "name": "Jane Smith",
-        "email": "jane.smith@example.com",
-        "createdAt": "2024-07-14T00:00:00.000Z",
-        "updatedAt": "2024-07-14T00:00:00.000Z",
+    },
+    {
+        "_id": "683092116036d159b890b66d",
+        "name": "Pankaj",
+        "email": "21cs3031@rgipt.ac.in",
+        "password": "$2b$08$aVm6ztXYWrFzdm3RCoAQ9u82QQsAxFjN1nV5saG98VbdnArZIosui",
+        "createdAt": "2025-05-23T15:19:45.805Z",
+        "updatedAt": "2025-05-23T15:19:45.805Z",
         "__v": 0
-      }
+    }
     ]
     ```
+    <img width="678" alt="Screenshot 2025-05-23 at 9 51 57 PM" src="https://github.com/user-attachments/assets/ee5b641c-c011-416f-8e32-47ff6e81a0d6" />
+
     
 ### Task API
 #### POST /api/tasks
@@ -213,38 +225,51 @@ TaskManagement/
     {
       "title": "Grocery Shopping",
       "description": "Buy groceries for the week",
-      "dueDate": "2024-07-20T00:00:00.000Z",
-      "assignedUserId": "64b0b0b0b0b0b0b0b0b0b0b0"
+      "dueDate": "2025-05-25",
+      "assignedUserId": "683092116036d159b890b66d"
     }
     ```
-    
+    <img width="469" alt="Screenshot 2025-05-23 at 9 54 46 PM" src="https://github.com/user-attachments/assets/319802dd-66f7-4bfe-8ce8-56f41917940b" />
+
 *   **Response (201 Created):**
     ```json
     {
-      "_id": "64b0b0b0b0b0b0b0b0b0b0b2",
-      "title": "Grocery Shopping",
-      "description": "Buy groceries for the week",
-      "dueDate": "2024-07-20T00:00:00.000Z",
-      "status": "pending",
-      "assignedUserId": "64b0b0b0b0b0b0b0b0b0b0b0",
-      "createdAt": "2024-07-14T00:00:00.000Z",
-      "updatedAt": "2024-07-14T00:00:00.000Z",
-      "__v": 0
+        "title": "Grocery Shopping",
+        "description": "Buy groceries for the week",
+        "dueDate": "2025-05-25T00:00:00.000Z",
+        "status": "pending",
+        "assignedUserId": "683092116036d159b890b66d",
+        "_id": "6830a1456036d159b890b67a",
+        "createdAt": "2025-05-23T16:24:37.530Z",
+        "updatedAt": "2025-05-23T16:24:37.530Z",
+        "__v": 0
     }
     ```
+    <img width="527" alt="Screenshot 2025-05-23 at 9 55 34 PM" src="https://github.com/user-attachments/assets/9a757d53-acef-4644-be10-0db2dc41a249" />
     
 *   **Response (400 Bad Request):**
     ```json
     {
-      "errors": [
-        {
-          "location": "body",
-          "msg": "Title is required",
-          "param": "title"
-        }
-      ]
+        "errors": {
+            "title": {
+                "name": "ValidatorError",
+                "message": "Path `title` is required.",
+                "properties": {
+                    "message": "Path `title` is required.",
+                    "type": "required",
+                    "path": "title"
+                },
+                "kind": "required",
+                "path": "title"
+            }
+        },
+        "_message": "Task validation failed",
+        "name": "ValidationError",
+        "message": "Task validation failed: title: Path `title` is required."
     }
     ```
+    <img width="646" alt="Screenshot 2025-05-23 at 9 56 13 PM" src="https://github.com/user-attachments/assets/a3fb834f-5b98-47d7-9ea7-427c071c9a20" />
+
     
 #### GET /api/tasks/:id
 *   **Description:** Gets a task by ID.
@@ -255,26 +280,30 @@ TaskManagement/
 *   **Response (200 OK):**
     ```json
     {
-      "_id": "64b0b0b0b0b0b0b0b0b0b0b2",
-      "title": "Grocery Shopping",
-      "description": "Buy groceries for the week",
-      "dueDate": "2024-07-20T00:00:00.000Z",
-      "status": "pending",
-      "assignedUserId": {
-        "_id": "64b0b0b0b0b0b0b0b0b0b0b0",
-        "name": "John Doe",
-        "email": "john.doe@example.com"
-      },
-      "createdAt": "2024-07-14T00:00:00.000Z",
-      "updatedAt": "2024-07-14T00:00:00.000Z",
-      "__v": 0
+        "_id": "6830a1456036d159b890b67a",
+        "title": "Grocery Shopping",
+        "description": "Buy groceries for the week",
+        "dueDate": "2025-05-25T00:00:00.000Z",
+        "status": "pending",
+        "assignedUserId": {
+            "_id": "683092116036d159b890b66d",
+            "name": "Pankaj",
+            "email": "21cs3031@rgipt.ac.in"
+        },
+        "createdAt": "2025-05-23T16:24:37.530Z",
+        "updatedAt": "2025-05-23T16:24:37.530Z",
+        "__v": 0
     }
     ```
+    <img width="591" alt="Screenshot 2025-05-23 at 9 58 49 PM" src="https://github.com/user-attachments/assets/b24c5e99-3b1c-4c98-af06-d72a3dd9f8c5" />
+
     
 *   **Response (404 Not Found):**
     ```json
     {}
     ```
+    <img width="594" alt="Screenshot 2025-05-23 at 9 59 56 PM" src="https://github.com/user-attachments/assets/22b7f90b-707e-47c9-a305-006df342628b" />
+
     
 #### GET /api/tasks
 *   **Description:** Gets all tasks with optional filtering and pagination.
@@ -288,43 +317,56 @@ TaskManagement/
 *   **Response (200 OK):**
     ```json
     {
-      "total": 25,
-      "page": 2,
-      "pages": 3,
-      "tasks": [
-        {
-          "_id": "64b0b0b0b0b0b0b0b0b0b0b3",
-          "title": "Task 11",
-          "description": "Description for task 11",
-          "dueDate": "2024-07-25T00:00:00.000Z",
-          "status": "in-progress",
-          "assignedUserId": {
-            "_id": "64b0b0b0b0b0b0b0b0b0b0b0",
-            "name": "John Doe",
-            "email": "john.doe@example.com"
-          },
-          "createdAt": "2024-07-14T00:00:00.000Z",
-          "updatedAt": "2024-07-14T00:00:00.000Z",
-          "__v": 0
-        },
-        {
-          "_id": "64b0b0b0b0b0b0b0b0b0b0b4",
-          "title": "Task 12",
-          "description": "Description for task 12",
-          "dueDate": "2024-07-26T00:00:00.000Z",
-          "status": "completed",
-          "assignedUserId": {
-            "_id": "64b0b0b0b0b0b0b0b0b0b0b1",
-            "name": "Jane Smith",
-            "email": "jane.smith@example.com"
-          },
-          "createdAt": "2024-07-14T00:00:00.000Z",
-          "updatedAt": "2024-07-14T00:00:00.000Z",
-          "__v": 0
-        }
-      ]
+        "total": 3,
+        "page": 1,
+        "pages": 1,
+        "tasks": [
+            {
+                "_id": "68307fe803c9fa82ab27ea5e",
+                "title": "Project",
+                "description": "Finish task management backend",
+                "dueDate": "2025-05-23T00:00:00.000Z",
+                "status": "pending",
+                "assignedUserId": {
+                    "_id": "683078d903c9fa82ab27ea48",
+                    "name": "Pankaj",
+                    "email": "test@example.com"
+                },
+                "createdAt": "2025-05-23T14:02:16.734Z",
+                "updatedAt": "2025-05-23T14:02:16.734Z",
+                "__v": 0
+            },
+            {
+                "_id": "6830802403c9fa82ab27ea61",
+                "title": "Project",
+                "description": "Finish task management backend",
+                "dueDate": "2025-05-23T00:00:00.000Z",
+                "status": "pending",
+                "assignedUserId": null,
+                "createdAt": "2025-05-23T14:03:16.913Z",
+                "updatedAt": "2025-05-23T14:03:16.913Z",
+                "__v": 0
+            },
+            {
+                "_id": "6830a1456036d159b890b67a",
+                "title": "Grocery Shopping",
+                "description": "Buy groceries for the week",
+                "dueDate": "2025-05-25T00:00:00.000Z",
+                "status": "pending",
+                "assignedUserId": {
+                    "_id": "683092116036d159b890b66d",
+                    "name": "Pankaj",
+                    "email": "21cs3031@rgipt.ac.in"
+                },
+                "createdAt": "2025-05-23T16:24:37.530Z",
+                "updatedAt": "2025-05-23T16:24:37.530Z",
+                "__v": 0
+            }
+        ]
     }
     ```
+    <img width="580" alt="Screenshot 2025-05-23 at 10 00 36 PM" src="https://github.com/user-attachments/assets/85f6f1cf-3217-4e28-8660-667f5db39f38" />
+
     
 #### PUT /api/tasks/:id
 *   **Description:** Updates a task.
@@ -342,22 +384,25 @@ TaskManagement/
 *   **Response (200 OK):**
     ```json
     {
-      "_id": "64b0b0b0b0b0b0b0b0b0b0b2",
-      "title": "Grocery Shopping",
-      "description": "Buy groceries for the week",
-      "dueDate": "2024-07-20T00:00:00.000Z",
-      "status": "completed",
-      "assignedUserId": "64b0b0b0b0b0b0b0b0b0b0b0",
-      "createdAt": "2024-07-14T00:00:00.000Z",
-      "updatedAt": "2024-07-14T00:00:00.000Z",
-      "__v": 0
+        "_id": "6830a1456036d159b890b67a",
+        "title": "Grocery Shopping",
+        "description": "Buy groceries for the week",
+        "dueDate": "2025-05-25T00:00:00.000Z",
+        "status": "completed",
+        "assignedUserId": "683092116036d159b890b66d",
+        "createdAt": "2025-05-23T16:24:37.530Z",
+        "updatedAt": "2025-05-23T16:32:10.338Z",
+        "__v": 0
     }
     ```
+    <img width="596" alt="Screenshot 2025-05-23 at 10 02 19 PM" src="https://github.com/user-attachments/assets/431201d3-dbb1-4fd6-927e-fb0fbb6daa2e" />
     
 *   **Response (404 Not Found):**
     ```json
     {}
     ```
+    <img width="600" alt="Screenshot 2025-05-23 at 10 03 18 PM" src="https://github.com/user-attachments/assets/a34861e3-c4a7-4a87-b46f-f4ee9589ffc8" />
+
     
 #### DELETE /api/tasks/:id
 *   **Description:** Deletes a task.
@@ -367,12 +412,26 @@ TaskManagement/
     *   `id`: The ID of the task.
 *   **Response (200 OK):**
     ```json
-    {}
+    {
+        "_id": "6830a1456036d159b890b67a",
+        "title": "Grocery Shopping",
+        "description": "Buy groceries for the week",
+        "dueDate": "2025-05-25T00:00:00.000Z",
+        "status": "completed",
+        "assignedUserId": "683092116036d159b890b66d",
+        "createdAt": "2025-05-23T16:24:37.530Z",
+        "updatedAt": "2025-05-23T16:32:10.338Z",
+        "__v": 0
+    }
     ```
+    <img width="603" alt="Screenshot 2025-05-23 at 10 03 49 PM" src="https://github.com/user-attachments/assets/f7b5a2e1-16f7-4a12-98cb-d7dadd9e5e4c" />
+
     
 *   **Response (404 Not Found):**
     ```json
     {}
     ```
+    <img width="619" alt="Screenshot 2025-05-23 at 10 04 19 PM" src="https://github.com/user-attachments/assets/87c11f64-4621-4d85-ac96-ed151a3685d3" />
+
     
 
