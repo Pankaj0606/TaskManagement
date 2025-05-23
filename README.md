@@ -31,10 +31,11 @@ This application is a RESTful API designed for managing tasks and users. It allo
 4.  **Configure environment variables:**
     *   Create a `.env` file in the root directory.
     *   Add the following variables, replacing the values with your own:
-                PORT=3000
-        MONGO_URI=<your_mongodb_connection_string>
-        JWT_SECRET=<your_jwt_secret>
-        ```
+      ```bash
+          PORT=3000
+          MONGO_URI=<your_mongodb_connection_string>
+          JWT_SECRET=<your_jwt_secret>
+      ```
         
 ### Running the Application
 1.  **Start the server:**
